@@ -1,5 +1,35 @@
 <?php
-#Class App extends static::$app????
+/**
+ *  @method static void registerAliasLoader(array $aliases) Register the aliased class loader.
+ *  @method static void startExceptionHandling() Start the exception handling for the request.
+ *  @method static string detectEnvironment(array|string $environments) Detect the application's current environment.
+ *  @method static string detectWebEnvironment(string $base, string|array $environments) Set the application environment for a web request.
+ *  @method static string detectConsoleEnvironment(array $arguments) Set the application environment from command-line arguments.
+ *  @method static bool isMachine($name) Determine if the name matches the machine name.
+ *  @method static bool runningInConsole() Determine if we are running in the console.
+ *  @method static bool runningUnitTests() Determine if we are running unit tests.
+ *  @method static void register(ServiceProvider $provider, array $options = array()) Register a service provider with the application.
+ *  @method static mixed make(string $abstract, array $parameters = array()) Resolve the given type from the container.
+ *  @method static void loadDeferredProvider(string $service) Load the provider for a deferred service.
+ *  @method static void before(Closure|string $callback) Register a "before" application filter.
+ *  @method static void after(Closure|string $callback) Register an "after" application filter.
+ *  @method static void close(Closure|string $callback) Register a "close" application filter.
+ *  @method static void finish(Closure|string $callback) Register a "finish" application filter.
+ *  @method static void run() Handles the given request and delivers the response.
+ *  @method static Response dispatch(Request $request) Handle the given request and get the response.
+ *  @method static Response handle(SymfonyRequest $request, int $type = HttpKernelInterface::MASTER_REQUEST, bool $catch = true) Handle the given request and get the response. Provides compatibility with BrowserKit functional testing.
+ *  @method static void boot() Boot the application's service providers.
+ *  @method static Request prepareRequest(Request $request) Prepare the request by injecting any services.
+ *  @method static Response prepareResponse($value, Request $request) Prepare the given value as a Response object.
+ *  @method static void setLocale(string $locale)  Set the current application locale.
+ *  @method static void abort(int $code, string $message = '', array $headers = array()) Throw an HttpException with the given data.
+ *  @method static void error(Closure $callback) Register an application error handler.
+ *  @method static void missing(Closure $callback) Register a 404 error handler.
+ *  @method static void setDeferredServices(array $services) Set the application's deferred services.
+ *  @method static mixed __get(string $key) Dynamically access application services.
+ *  @method static void __set(string $key, mixed $value) Dynamically set application services.
+ */
+class App extends Illuminate\Foundation\Application {}
 /**
  *  @method static bool check() Determine if the current user is authenticated.
  *  @method static bool guest() Determine if the current user is a guest.
