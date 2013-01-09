@@ -50,7 +50,49 @@ class App extends Illuminate\Foundation\Application {}
  */
 class Auth extends Illuminate\Auth\Guard {}
 #class Artisan extends
+/**
+ * @method static bool has(string $key) Determine if an item exists in the cache.
+ * @method static mixed get(string $key, $default = null) Retrieve an item from the cache by key.
+ * @method static void put(string $key, mixed $value, int $minutes) Store an item in the cache.
+ * @method static void forever($key, $value)
+ * @method static remember(string $key, int $minutes, Closure $callback) Get an item from the cache, or store the default value.
+ * @method static rememberForever(string $key, Closure $callback) Get an item from the cache, or store the default value forever.
+ * @method static void forget($key)  Remove an item from the cache.
+ * @method static void flush() Remove all items from the cache.
+ * @method static int getDefaultCacheTime() Get the default cache time.
+ * @method static int setDefaultCacheTime(int $minutes) Set the default cache time in minutes.
+ * @method static bool existsInMemory(string $key) Determine if an item is in memory.
+ * @method static array getMemory() Get all of the values in memory.
+ * @method static mixed getFromMemory(string $key)  Get the value of an item in memory.
+ * @method static void setInMemory(string $key, mixed $value) Set the value of an item in memory.
+ * @method static bool offsetExists(string $key) Determine if a cached value exists.
+ * @method static mixed offsetGet(string $key) Retrieve an item from the cache by key.
+ * @method static void offsetSet(string $key, mixed $value) Store an item in the cache for the default time.
+ * @method static void offsetUnset(string $key) Remove an item from the cache.
+ */
 class Cache extends Illuminate\Cache\Store {}
+/**
+ * @method static bool  has(string $key) Determine if the given configuration value exists.
+ * @method static mixed get($key, $default = null)
+ * @method static void set(string $key, mixed $value)
+ * @method static void load(string $group, string $namespace, string $collection) Load the configuration group for the key.
+ * @method static array callAfterLoad(string $namespace, string $group, array $items) Call the after load callback for a namespace.
+ * @method static array parseNamespacedSegments(string $key) Parse an array of namespaced segments.
+ * @method static array parsePackageSegments(string $key, string $namespace, string $item) Parse the segments of a package namespace.
+ * @method static void package(string $package, string $hint, string $namespace = null) Register a package for cascading configuration.
+ * @method static string getPackageNamespace(string $package, string $namespace) Get the configuration namespace for a package.
+ * @method static void afterLoading(string $namespace, Closure $callback) Register an after load callback for a given namespace.
+ * @method static string getCollection(string $group, string $namespace = null) Get the collection identifier.
+ * @method static void addNamespace(string $namespace, string $hint) Add a new namespace to the loader.
+ * @method static LoaderInterface  getLoader() Get the loader implementation.
+ * @method static string getEnvironment() Get the current configuration environment.
+ * @method static array getAfterLoadCallbacks() Get the after load callback array.
+ * @method static array getItems() Get all of the configuration items
+ * @method static bool offsetExists(string $key) Determine if the given configuration option exists.
+ * @method static bool offsetGet(string $key) Get a configuration option.
+ * @method static bool offsetSet(string $key, $value) Set a configuration option.
+ * @method static bool offsetUnset($key) Unset a configuration option.
+ */
 class Config extends Illuminate\Config\Repository {}
 #class Console
 class Container extends Illuminate\Container {}
@@ -61,10 +103,35 @@ class Facade extends Illuminate\Support\Facades\Facade {}
 class File extends  Illuminate\Filesystem {}
 class Hash extends Illuminate\Hashing\BcryptHasher {}
 /**
- * @method static get(string|array $key = null, $default = null) Get an item from the input data. This method is used for all request verbs (GET, POST, PUT, PATCH and DELETE)
+ * @method static mixed get(string|array $key = null, $default = null) Get an item from the input data. This method is used for all request verbs (GET, POST, PUT, PATCH and DELETE)
+ * @method static bool has(string|array $key)  Determine if the request contains a given input item.
+ * @method static array all()
+ * @method static array only(array|string $keys) Get a subset of the items from the input data.
+ * @method static array except(array|string $keys) Get all of the input except for a specified array of items.
+ * @method static string query(string $key = null, mixed $default = null) Retrieve a query string item from the request.
+ * @method static string cookie(string $key = null, mixed $default = null) Retrieve a cookie from the request.
+ * @method static UploadedFile file($key = null, $default = null) Retrieve a file from the request.
+ * @method static bool hasFile(string $key) Determine if the uploaded data contains a file.
+ * @method static string header($key = null, $default = null)
+ * @method static string server($key = null, $default = null)
+ * @method static string old($key = null, $default = null)
+ * @method static void flash($filter = null, $keys = array())
+ * @method static void flashOnly()
+ * @method static void flashExcept()
+ * @method static void flush()
+ * @method static void merge(array $input)
+ * @method static void replace(array $input)
+ * @method static object json( dynamic ) Get the JSON payload for the request.
  */
 class Input extends Illuminate\Http\Request {}
-class Log extends Illuminate\Log\Writer
+/**
+ * @method static void useFiles(string $path, string $level = 'debug') Register a file log handler.
+ * @method static void useDailyFiles($path, $days = 0, $level = 'debug')
+ * @method static int  parseLevel(string $level) Parse the string level into a Monolog constant. debug|info|notice|warning|error|critical|alert|emergency
+ * @method static Monolog\Logger getMonolog() Get the underlying Monolog instance.
+ * @method static mixed __call($method, $parameters) Dynamically handle error additions.( Closure support )
+ */
+class Log extends Illuminate\Log\Writer {}
 class Request extends Illuminate\Http\Request {}
 class Response extends Illuminate\Support\Facades\Response {}
 #class Response extends Illuminate\Http\Response {}
