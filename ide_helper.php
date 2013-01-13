@@ -67,7 +67,18 @@ class App extends Illuminate\Foundation\Application {}
  *  @method static string               getRecallerName() Get the name of the cookie used to store the "recaller".
  */
 class Auth extends Illuminate\Auth\Guard {}
-#class Artisan extends
+
+/**
+ * @method static void|mixed call($command, array $parameters = array(), OutputInterface $output = null) Run an Artisan console command by name.
+ * @method static Illuminate\Console\Application getArtisan() Get the Artisan console instance.
+ */
+class Artisan extends Illuminate\Foundation\Artisan {}
+/**
+ * @method static void   extend(Closure $compiler) Register a custom Blade compiler.
+ * @method static void   compile($path) Compile the view at the given path.
+ * @method static string compileString($value)
+ */
+class Blade extends Illuminate\View\Compilers\BladeCompiler {}
 /**
  * @method static bool  has(string $key) Determine if an item exists in the cache.
  * @method static mixed get(string $key, $default = null) Retrieve an item from the cache by key.
@@ -113,7 +124,8 @@ class Cache extends Illuminate\Cache\Store {}
  */
 class Config extends Illuminate\Config\Repository {}
 #class Console
-class Container extends Illuminate\Container {}
+# Use App:: instead of Container
+#class Container extends Illuminate\Container\Container {}
 
 /**
  * @method static bool                                     has($key) Determine if a cookie exists and is not null.
@@ -144,6 +156,37 @@ class Cookie extends Illuminate\CookieJar {}
 class Crypt extends Illuminate\Encryption\Encrypter {}
 
 /**
+ * @method static Illuminate\Database\Query\Builder table($table) Begin a fluent query against a database table.
+ * @method static Illuminate\Database\Query\Expression raw(mixed $value)
+ * @method static mixed  selectOne($query, $bindings = array())
+ * @method static array  select($query, $bindings = array())
+ * @method static bool   insert($query, $bindings = array())
+ * @method static int    update($query, $bindings = array())
+ * @method static bool   delete($query, $bindings = array())
+ * @method static bool   statement($query, $bindings = array()) Execute an SQL statement and return the boolean result.
+ * @method static int    affectingStatement($query, $bindings = array())
+ * 
+ * @method static mixed transaction(Closure $callback) Execute a Closure within a transaction.
+ * @method static array pretend(Closure $callback) Execute the given callback in "dry run" mode.
+ * @method static mixed run($query, $bindings, Closure $callback) Run a SQL statement and log its execution context.
+ * @method static void  logQuery($query, $bindings, $time = null) Log a query in the connection's query log.
+ */
+class DB extends Illuminate\Database\Connection {}
+
+/**
+ * @method        Illuminate\Database\Eloquent\Model      fill(array $attributes)
+ * @method        Illuminate\Database\Eloquent\Model      newInstance($attributes = array(), $exists = false)  clone existing attribute onto a new dirty model
+ * @method        Illuminate\Database\Eloquent\Model      newExisting($attributes = array()) clone existing attribute onto a model with existing flag
+ * @method static Illuminate\Database\Eloquent\Model      create(array $attributes) Save a new model and return the instance.
+ * @method static Illuminate\Database\Eloquent\Builder    on($connection)  
+ * @method static Illuminate\Database\Eloquent\Collection all($columns = array('*')) 
+ * @method static Illuminate\Database\Eloquent\Model|Collection find($id, $columns = array('*'))
+ * @method static Illuminate\Database\Eloquent\Builder    with($relations)
+ * 
+ */
+class Eloquent extends Illuminate\Database\Eloquent\Model {}
+
+/**
  * @method static void     listen($event, $listener, $priority = 0)
  * @method static Symfony\Component\EventDispatcher\Event  fire($eventName, $payload = array())
  * @method static void     subscribe(EventSubscriberInterface $subscriber)
@@ -153,7 +196,37 @@ class Crypt extends Illuminate\Encryption\Encrypter {}
  */
 class Event extends Illuminate\Events\Dispatcher {}
 class Facade extends Illuminate\Support\Facades\Facade {}
-class File extends  Illuminate\Filesystem {}
+
+/**
+ * @method static string get($path) Get the contents of a file.
+ * @method static string getRemote($path) Get the contents of a remote file.
+ * @method static mixed  getRequire($path) Get the returned value of a file.
+ * @method static void   requireOnce($file)
+ * @method static int    put($path, $contents)
+ * @method static int    append($path, $data)
+ * @method static bool   delete($path)
+ * @method static void   move($path, $target)
+ * @method static void   copy($path, $target)
+ * @method static void   extension($path) Extract the file extension from a file path.
+ * @method static void   type($path) Get the file type of a given file.
+ * @method static int    size($path)
+ * @method static int    lastModified($path)
+ * @method static bool   isDirectory($directory)
+ * @method static array  glob($pattern, $flags = 0)
+ * @method static array  files($directory) Get an array of all files in a directory.
+ * @method static bool   makeDirectory($path, $mode = 0777, $recursive = false)
+ * @method static void   copyDirectory($directory, $destination, $options = null)
+ * @method static void   deleteDirectory($directory, $preserve = false)
+ * @method static void   cleanDirectory($directory)
+ */
+class File extends  Illuminate\Filesystem\Filesystem {}
+
+/**
+ * @method static string getRandomSalt()
+ * @method static bool   check($value, $hashedValue, array $options = array())
+ * @method static string make($value, array $options = array())
+ *
+ */
 class Hash extends Illuminate\Hashing\BcryptHasher {}
 /**
  * @method static mixed get(string|array $key = null, $default = null) Get an item from the input data. This method is used for all request verbs (GET, POST, PUT, PATCH and DELETE)
@@ -177,6 +250,21 @@ class Hash extends Illuminate\Hashing\BcryptHasher {}
  * @method static object json( dynamic ) Get the JSON payload for the request.
  */
 class Input extends Illuminate\Http\Request {}
+/**
+ * @method static Symfony\Component\Translation\Translator createSymfonyTranslator($default, $fallback)
+ * @method static voide  has($key, $locale = null)
+ * @method static string get($key, $parameters = array(), $locale = null)
+ * @method static string choice($key, $number, $parameters = array(), $locale = null)
+ * @method static string trans($id, array $parameters = array(), $domain = 'messages', $locale = null)
+ * @method static string transChoice($id, $number, array $parameters = array(), $domain = 'messages', $locale = null)
+ * @method static string load($group, $namespace, $locale)
+ * @method static void   addResource(array $lines, $locale, $domain)
+ * @method static bool   loaded($group, $namespace, $locale)
+ * @method static void   setLoaded($group, $namespace, $locale)
+ * @method static void   addNamespace($namespace, $hint)
+ * @method static string getLocale()
+ * @method static void   setLocale($locale)
+ */
 class Lang extends Illuminate\Translation\Translator {}
 /**
  * @method static void useFiles(string $path, string $level = 'debug') Register a file log handler.
@@ -186,13 +274,74 @@ class Lang extends Illuminate\Translation\Translator {}
  * @method static mixed __call($method, $parameters) Dynamically handle error additions.( Closure support )
  */
 class Log extends Illuminate\Log\Writer {}
+/**
+ * @method static void   alwaysFrom($address, $name = null)
+ * @method static void   send(string|array $view, array $data, Closure|string $callback)
+ * @method static void   sendSwiftMessage($message)
+ * @method static void   logMessage(Swift_Message $message)
+ * @method static void   callMessageBuilder(Closure|string $callback, Illuminate\Mail\Message $message)
+ * @method static Illuminate\Mail\Message createMessage()
+ * @method static void   pretend($value = true)
+ */
+class Mail extends Illuminate\Mail\Mailer {}
+#class Paginator extends Illuminate\Pagination\BootstrapPresenter {}
+/**
+ * @method static void todo()
+ */
+class Queue {}
+
+/**
+ * @method static Illuminate\Http\Request instance()
+ * @method static string       root() Get the root URL for the application.
+ * @method static string       url() Get the URL (no query string) for the request.
+ * @method static string       fullUrl() Get the full URL for the request.
+ * @method static string       path() Get the current path info for the request.
+ * @method static string|array is($pattern) Determine if the current request URI matches a pattern.
+ * @method static bool         ajax() 
+ * @method static bool         secure()
+ * @method static mixed        get(string|array $key = null, $default = null) Get an item from the input data. This method is used for all request verbs (GET, POST, PUT, PATCH and DELETE)
+ * @method static bool         has(string|array $key)  Determine if the request contains a given input item.
+ * @method static array        all()
+ * @method static array        only(array|string $keys) Get a subset of the items from the input data.
+ * @method static array        except(array|string $keys) Get all of the input except for a specified array of items.
+ * @method static string       query(string $key = null, mixed $default = null) Retrieve a query string item from the request.
+ * @method static string       cookie(string $key = null, mixed $default = null) Retrieve a cookie from the request.
+ * @method static UploadedFile file($key = null, $default = null) Retrieve a file from the request.
+ * @method static bool         hasFile(string $key) Determine if the uploaded data contains a file.
+ * @method static string       header($key = null, $default = null)
+ * @method static string       server($key = null, $default = null)
+ * @method static string       old($key = null, $default = null)
+ * @method static void         flash($filter = null, $keys = array())
+ * @method static void         flashOnly()
+ * @method static void         flashExcept()
+ * @method static void         flush()
+ * @method static void         merge(array $input)
+ * @method static void         replace(array $input)
+ * @method static object       json( dynamic ) Get the JSON payload for the request.
+ */
 class Request extends Illuminate\Http\Request {}
+
+/**
+ * @method static Symfony\Component\HttpFoundation\Response           make($content = '', $status = 200, array $headers = array())
+ * @method static Symfony\Component\HttpFoundation\JsonResponse       json($data = array(), $status = 200, array $headers = array())
+ * @method static Symfony\Component\HttpFoundation\StreamedResponse   stream($callback, $status = 200, array $headers = array())
+ * @method static Symfony\Component\HttpFoundation\BinaryFileResponse download($file, $status = 200, $headers = array())
+ *
+ */
 class Response extends Illuminate\Support\Facades\Response {}
 #class Response extends Illuminate\Http\Response {}
-#class Mail  extends Illuminate\Mail\Message {}
-class Mail extends Illuminate\Mail\Mailer {}
-class Paginator extends Illuminate\Pagination\BootstrapPresenter {}
-class Queue {}
+
+/**
+ * @method static Illuminate\Redis\Database  connection($name = null)
+ * @method static Illuminate\Redis\Database  createConnection($name)
+ * @method static array                      getConfig($name)
+ * @method static string                     getDefaultConnection()
+ * 
+ * The real query magic:
+ * @method static mixed __call($method, $parameters) Dynamically make a Redis command.
+ * @method static mixed command($method, array $parameters = array()) Run a command against the Redis database.
+ * 
+ */
 class Redis extends Illuminate\Redis\Database {}
 
 /**
@@ -209,29 +358,112 @@ class Redis extends Illuminate\Redis\Database {}
  * @method static void                     resource(string $resource, string $controller, array $options = array()) Route a resource to a controller.
  * @method static void                     group(array $attributes, Closure $callback) Create a route group with shared attributes.
  * @method static Symfony\Component\HttpFoundation\Response dispatch(Symfony\Component\HttpFoundation\Request $request) Get the response for a given request.
- * @method statis void                     before(Closure $callback) Register a "before" routing filter.
- * @method statis void                     after(Closure $callback) Register an "after" routing filter.
- * @method statis void                     close(Closure $callback) Register a "close" routing filter.
- * @method statis void                     finish(Closure $callback) Register a "finish" routing filters.
- * @method statis void                     addFilter(string $name, Closure|string $callback) Register a new filter with the application.
- * @method statis Closure                  getFilter($name) Get a registered filter callback.
- *
- *
- *
+ * @method static void                     before(Closure $callback) Register a "before" routing filter.
+ * @method static void                     after(Closure $callback) Register an "after" routing filter.
+ * @method static void                     close(Closure $callback) Register a "close" routing filter.
+ * @method static void                     finish(Closure $callback) Register a "finish" routing filters.
+ * @method static void                     addFilter(string $name, Closure|string $callback) Register a new filter with the application.
+ * @method static Closure                  getFilter($name) Get a registered filter callback.
  */
 class Route extends Illuminate\Routing\Router {}
-class Redirect extends Illuminate\Routing\Redirector {}
-class URL extends Illuminate\Routing\UrlGenerator {}
-class Controller extends Illuminate\Routing\Controllers\Controller {}
-class Session extends Illuminate\Session\Store {}
-class Lang extends Illuminate\Translation\Translator {}
-class Validator extends Illuminate\Validation\Factory {}
-class View extends Illuminate\View\Environment {}
 
 /**
- * @method static Illuminate\Database\Schema\Builder connection(strin $name) Get a schema builder instance for a connection.
- * @method static
+ * @method static Illuminate\Http\RedirectResponse back($status = 302, $headers = array())
+ * @method static Illuminate\Http\RedirectResponse to($path, $status = 302, $headers = array(), $secure = false)
+ * @method static Illuminate\Http\RedirectResponse secure($path, $status = 302, $headers = array())
+ * @method static Illuminate\Http\RedirectResponse route($route, $parameters = array(), $status = 302, $headers = array())
+ * @method static Illuminate\Http\RedirectResponse action($action, $parameters = array(), $status = 302, $headers = array())
+ * @method static Illuminate\Http\RedirectResponse createRedirect($path, $status, $headers)
+ */
+class Redirect extends Illuminate\Routing\Redirector {}
+
+/**
+ * @method static string to($path, $parameters = array(), $secure = null)
+ * @method static string secure($path, $parameters = array())
+ * @method static string asset($path, $secure = null)
+ * @method static string secureAsset($path)
+ * @method static string getScheme($secure = null)
+ * @method static string route($name, $parameters = array(), $absolute = true)
+ * @method static string action($action, $parameters = array(), $absolute = true)
+ * @method static string getRootUrl($scheme)
+ * @method static bool   isValidUrl($path)
+ */
+class URL extends Illuminate\Routing\UrlGenerator {}
+class Controller extends Illuminate\Routing\Controllers\Controller {}
+
+/**
+ * @method static Illuminate\Database\Schema\Builder   connection(strin $name) Get a schema builder instance for a connection.
+ * @method static bool                                 hasTable(string $table)
+ * @method static Illuminate\Database\Schema\Blueprint table($table, Closure $callback(Illuminate\Database\Schema\Blueprint $table) )
+ * @method static Illuminate\Database\Schema\Blueprint create($table, Closure $callback)
+ * @method static Illuminate\Database\Schema\Blueprint drop($table)
+ * @method static Illuminate\Database\Schema\Blueprint dropIfExists($table)
+ * @method static Illuminate\Database\Schema\Blueprint rename($from, $to)
+ * @method static Illuminate\Database\Schema\Blueprint build(Blueprint $blueprint)
+ * @method static Illuminate\Database\Schema\Blueprint createBlueprint($table, Closure $callback = null)
+ * @method static Illuminate\Database\Schema           setConnection(Connection $connection)
+ * @method static Illuminate\Database\Connection       getConnection()
  */
 class Schema extends Illuminate\Database\Schema\Builder {}
+
+/**
+ * @method static void   start(Illuminate\Cookie\CookieJar $cookies)
+ * @method static array  createFreshSession()
+ * @method static array  createData()
+ * @method static string createSessionID()
+ * @method static bool   isInvalid($session)
+ * @method static bool   has(string $key)
+ * @method static mixed  get($key, $default = null)
+ * @method static mixed  getOldInput($key = null, $default = null)
+ * @method static array  all()
+ * @method static void   put($key, $value)
+ * @method static void   flash($key, $value)
+ * @method static void   flashInput(array $value)
+ * @method static void   reflash()
+ * @method static void   keep($keys)
+ * @method static void   forget($key)
+ * @method static void   flush()
+ * @method static void   finish(Response $response, CookieJar $cookie, $lifetime)
+ * @method static void   ageFlashData()
+ * @method static string getToken()
+ * @method static string regenerate()
+ * @method static bool   hitsLottery()
+ * @method static bool   sessionExists()
+ * @method static void   setExists($value)
+ * @method static void   setLifetime($minutes)
+ * @method static void   setCookieOption($option, $value)
+ */
+class Session extends Illuminate\Session\Store {}
+
+/**
+ * @method static Illuminate\Validation\Validator make(array $data, array $rules, array $messages = array())
+ * @method static Illuminate\Validation\Validator resolve($data, $rules, $messages)
+ * @method static Closure                         extend($rule, Closure $extension)
+ */
+class Validator extends Illuminate\Validation\Factory {}
+
+/**
+ * @method static Illuminate\View\View                    make($view, array $data = array())
+ * @method static string                                  renderEach($view, $data, $iterator, $empty = 'raw|')
+ * @method static Illuminate\View\Engines\EngineInterface getEngineFromPath($path)
+ * @method static string                                  getExtension($path)
+ * @method static void                                    share($key, $value)
+ * @method static Closure                                 composer($view, $callback)
+ * @method static Closure                                 addClassComposer($view, $class)
+ * @method static void                                    callComposer(View $view)
+ * @method static void                                    addLocation($location) Add a location to the array of view locations.
+ * @method static void                                    addNamespace($namespace, $hints) Add a new namespace to the loader.
+ * @method static void                                    addExtension($extension, $engine, $resolver = null) Register a valid view extension and its engine.
+ * @method static Illuminate\View\Engines\EngineResolver  getEngineResolver() Get the engine resolver instance.
+ * @method static Illuminate\View\ViewFinder              getFinder() Get the view finder instance.
+ * @method static Illuminate\Events\Dispatcher            getDispatcher() Get the event dispatcher instance.
+ * @method static Illuminate\Container                    getContainer()
+ * @method static void                                    setContainer(Container $container)
+ * @method static array                                   getShared() Get all of the shared data for the environment.
+ * @method static array                                   getSections()
+ */
+class View extends Illuminate\View\Environment {}
+
+
 
 
